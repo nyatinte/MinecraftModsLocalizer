@@ -14,22 +14,29 @@ from update import check_version
 if __name__ == '__main__':
     # レイアウトの定義
     layout = [
-        [sg.Text("Translate Target")],
+        [sg.Text("Translate Target", font=('Helvetica', 10, 'bold'))],
         [sg.Radio('Mod', key='target1', group_id=1, default=True), sg.Radio('FtbQuests', key='target2', group_id=1), sg.Radio('BetterQuesting', key='target3', group_id=1), sg.Radio('Patchouli', key='target4', group_id=1)],
-        [sg.Text("OpenAI API KEY")],
+        [sg.Text("OpenRouter API KEY", font=('Helvetica', 10, 'bold'))],
         [sg.InputText(key='OPENAI_API_KEY', expand_x=True)],
         [sg.Text("Chunk Size")],
         [sg.Text("単体mod翻訳、クエスト、Patchouliの翻訳では1\nModPackで大量のModを一括で翻訳するときは100くらいまで上げることをお勧めします(1だと翻訳時間がすごいことになります)")],
         [sg.Slider(range=(1, 200), key='CHUNK_SIZE', default_value=provide_chunk_size(), expand_x=True)],
-        [sg.Text("Model")],
-        [sg.InputText(key='MODEL', default_text=provide_model(), expand_x=True)],
-        [sg.Text("Prompt")],
-        [sg.Multiline(key='PROMPT', default_text=provide_prompt(), expand_x=True)],
-        [sg.Button("Translate", key='translate')]
+        [sg.Text("Model (例: google/gemini-2.5-flash-preview)")],
+        [sg.Text("※自動的に'openrouter/'というプレフィックスが付与されます")],
+        [sg.InputText(key='MODEL', expand_x=True)],
+        [sg.Text("Prompt", font=('Helvetica', 10, 'bold'))],
+        [sg.Multiline(key='PROMPT', default_text=provide_prompt(), expand_x=True, size=(None, 10))],
+        [sg.VPush()], # 垂直方向のスペース追加
+        [sg.Button("Translate", key='translate', size=(15, 1), font=('Helvetica', 10, 'bold'))]
     ]
 
-    # ウィンドウの作成
-    window = sg.Window('MinecraftModLocalizer', layout, size=(900, 500))
+    # ウィンドウの作成 - サイズを大きくして余白を追加
+    window = sg.Window('MinecraftModLocalizer', layout, size=(900, 600), margins=(20, 20), finalize=True)
+    
+    # 全てのテキスト要素のフォントを設定し、より見やすくする
+    for key in window.key_dict:
+        if isinstance(window[key], sg.Text):
+            window[key].update(font=('Helvetica', 10))
 
     # 現在の日時を取得
     now = datetime.now()
@@ -58,7 +65,15 @@ if __name__ == '__main__':
             # 入力された値を取得
             set_api_key(values['OPENAI_API_KEY'])
             set_chunk_size(int(values['CHUNK_SIZE']))
-            set_model(values['MODEL'])
+            
+            # モデル名が入力されているか確認
+            if not values['MODEL']:
+                sg.popup('モデル名を入力してください。例: google/gemini-2.5-flash-preview')
+                continue
+            
+            # openrouterプレフィックスを追加
+            model_name = 'openrouter/' + values['MODEL']
+            set_model(model_name)
             set_prompt(values['PROMPT'])
 
             # バージョンチェック

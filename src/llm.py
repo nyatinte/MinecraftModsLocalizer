@@ -1,34 +1,36 @@
 import logging
 import re
 import time
-from openai import OpenAI
+from litellm import completion
 
 from provider import provide_api_key, provide_model, provide_prompt
 
 
-def translate_with_chatgpt(split_target, timeout):
+def translate_with_llm(split_target, timeout):
     start_time = time.time()
     result = []
 
     # 改行を削除(翻訳時扱いがめんどくさいため)
     split_target = [line.replace('\\n', '').replace('\n', '') for line in split_target] if len(split_target) > 1 else split_target
 
-    # APIキーとクライアントの初期化
-    client = OpenAI(api_key=provide_api_key())
+    # APIキーを取得
+    api_key = provide_api_key()
+    # モデル名を取得
+    model = provide_model()
 
     try:
-        # ChatGPTを用いて翻訳を行う
-        response = client.chat.completions.create(
-            model=provide_model(),
+        # LiteLLM + OpenRouterを用いて翻訳を行う
+        response = completion(
+            model=model,
+            api_key=api_key,
             messages=[
                 {
                     "role": "system",
-                    "content": [
-                        {"type": "text", "text": provide_prompt().replace('{line_count}', str(len(split_target)))}]
+                    "content": provide_prompt().replace('{line_count}', str(len(split_target)))
                 },
                 {
                     "role": "user",
-                    "content": [{"type": "text", "text": '\n'.join(split_target)}]
+                    "content": '\n'.join(split_target)
                 }
             ],
         )
@@ -39,7 +41,7 @@ def translate_with_chatgpt(split_target, timeout):
             result = translated_text.splitlines() if len(split_target) > 1 else [translated_text.replace('\n', '')]
             result = [re.sub(r'(?<!\\)"', r'\\"', line) for line in result]
         else:
-            logging.error("Failed to get a valid response from the ChatGPT model.")
+            logging.error("Failed to get a valid response from the language model.")
 
     except Exception as e:
         elapsed_time = time.time() - start_time

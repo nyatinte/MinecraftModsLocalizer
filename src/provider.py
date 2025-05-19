@@ -1,6 +1,6 @@
 API_KEY = None
 CHUNK_SIZE = 1
-MODEL = 'gpt-4o-mini-2024-07-18'
+MODEL = None
 PROMPT = """You are a professional translator. Please translate the following English text into Japanese, one line at a time, step by step, in order
 Make sure that the number of lines of text before and after translation is the same. Never add or subtract extra lines.
 
