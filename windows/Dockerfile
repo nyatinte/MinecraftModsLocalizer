@@ -14,7 +14,7 @@ COPY ./src /app/src
 WORKDIR /app/src
 
 # 依存関係のインストール
-RUN pip install --no-cache-dir pyzipper requests pyinstaller TkEasyGUI litellm
+RUN pip install --no-cache-dir pyzipper requests pyinstaller TkEasyGUI litellm tiktoken
 
 # tkinterのインストール確認（pipで明示的にインストール）
 RUN pip install tk || echo "tkinter already included in python distribution"
