@@ -31,12 +31,7 @@ if __name__ == '__main__':
     ]
 
     # ウィンドウの作成 - サイズを大きくして余白を追加
-    window = sg.Window('MinecraftModLocalizer', layout, size=(900, 600), margins=(20, 20), finalize=True)
-    
-    # 全てのテキスト要素のフォントを設定し、より見やすくする
-    for key in window.key_dict:
-        if isinstance(window[key], sg.Text):
-            window[key].update(font=('Helvetica', 10))
+    window = sg.Window('MinecraftModLocalizer', layout, size=(900, 700), margins=(20, 20), finalize=True)
 
     # 現在の日時を取得
     now = datetime.now()
