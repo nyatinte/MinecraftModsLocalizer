@@ -71,7 +71,7 @@ jobs:
       - name: Run Docker container
         id: run-container
         run: |
-          docker run --rm -v $(pwd)/src:/src -v $(pwd)/linux:/linux \
+          docker run --rm -v $(pwd)/src:/src -v $(pwd)/linux:/linux -v $(pwd)/linux/dist:/dist \
               pyinstaller-linux pyinstaller main.py \
               --name minecraft-mods-localizer-linux-${{ github.ref_name }} \
               --onedir --onefile --clean --console \
