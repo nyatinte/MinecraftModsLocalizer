@@ -77,7 +77,7 @@ jobs:
               --onedir --onefile --clean --console \
               --distpath /dist \
               --workpath /build \
-              --specpath
+              --specpath /build
 
       - name: Check Artifacts
         run: ls -R ./linux/dist
