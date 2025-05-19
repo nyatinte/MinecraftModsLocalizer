@@ -7,6 +7,11 @@ RUN powershell -Command "Set-ExecutionPolicy Bypass -Scope Process -Force; [Syst
 # Pythonのインストール
 RUN powershell -Command "choco install -y python --version 3.12.0"
 
+# Visual C++ Redistributable のインストール（PyInstallerでビルドしたexeの安定動作のため）
+RUN powershell -Command "choco install -y vcredist140"
+
+# Tcl/Tk（tkinter依存）をインストール
+RUN powershell -Command "choco install -y tcltk"
 
 # ホストマシンのコードをコンテナにコピー
 COPY ./src /app/src
@@ -14,3 +19,9 @@ WORKDIR /app/src
 
 # 依存関係のインストール
 RUN pip install --no-cache-dir pyzipper requests pyinstaller TkEasyGUI litellm
+
+# tkinterのインストール確認（pipで明示的にインストール）
+RUN pip install tk || echo "tkinter already included in python distribution"
+
+# PyInstallerでビルドする場合の例（コメントアウト）
+# RUN pyinstaller main.py --onefile --clean --console --distpath /app/dist --workpath /app/build --specpath /app
