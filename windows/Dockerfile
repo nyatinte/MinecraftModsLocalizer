@@ -7,11 +7,7 @@ RUN powershell -Command "Set-ExecutionPolicy Bypass -Scope Process -Force; [Syst
 # Pythonのインストール
 RUN powershell -Command "choco install -y python --version 3.12.0"
 
-# Visual C++ Redistributable のインストール（PyInstallerでビルドしたexeの安定動作のため）
 RUN powershell -Command "choco install -y vcredist140"
-
-# Tcl/Tk（tkinter依存）をインストール
-RUN powershell -Command "choco install -y tcltk"
 
 # ホストマシンのコードをコンテナにコピー
 COPY ./src /app/src
