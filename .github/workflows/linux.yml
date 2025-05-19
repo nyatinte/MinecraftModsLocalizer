@@ -10,7 +10,7 @@ jobs:
     runs-on: linux-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Build Docker image
         run: docker build --no-cache -f ./linux/Dockerfile -t pyinstaller-linux .
@@ -30,8 +30,7 @@ jobs:
         run: ls -R ./linux/dist
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: minecraft-mods-localizer-linux
           path: ./linux/dist/main
-
