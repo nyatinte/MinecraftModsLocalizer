@@ -22,7 +22,7 @@ jobs:
         run: docker run --rm -v "${{ github.workspace }}\windows\dist:C:\dist" pyinstaller-windows powershell -Command "pyinstaller main.py --name minecraft-mods-localizer-windows-${{ github.ref_name }} --onedir --onefile --clean --console --distpath C:\dist --workpath C:\build --specpath C:\"
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: minecraft-mods-localizer-windows
           path: windows/dist/minecraft-mods-localizer-windows-${{ github.ref_name }}.exe
@@ -54,7 +54,7 @@ jobs:
         run: ls -R ./dist
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: minecraft-mods-localizer-macos
           path: ./dist/minecraft-mods-localizer-macos-${{ github.ref_name }}
@@ -77,13 +77,13 @@ jobs:
               --onedir --onefile --clean --console \
               --distpath /linux/dist \
               --workpath /linux/build \
-              --specpath /linux 
+              --specpath /linux
 
       - name: Check Artifacts
         run: ls -R ./linux/dist
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: minecraft-mods-localizer-linux
           path: ./linux/dist/minecraft-mods-localizer-linux-${{ github.ref_name }}
