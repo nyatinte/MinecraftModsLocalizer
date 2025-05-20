@@ -42,7 +42,7 @@ def translate_with_openrouter(split_target, timeout):
             result = translated_text.splitlines() if len(split_target) > 1 else [translated_text.replace('\n', '')]
             result = [re.sub(r'(?<!\\)"', r'\\"', line) for line in result]
         else:
-            logging.error("Failed to get a valid response from the ChatGPT model.")
+            logging.error("Failed to get a valid response from the OpenRouter model.")
 
     except Exception as e:
         elapsed_time = time.time() - start_time

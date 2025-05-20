@@ -82,7 +82,7 @@ def prepare_translation(targets):
 
         attempts = 0
         while attempts < MAX_ATTEMPTS:  # 最大5回まで試行
-            translated_split_target = translate_with_chatgpt(split_target, timeout)
+            translated_split_target = translate_with_openrouter(split_target, timeout)
             # 翻訳後の行数が一致すれば、マッピングしてループを抜ける
             if len(split_target) == len(translated_split_target):
                 for key, value in zip(split_target, translated_split_target):
