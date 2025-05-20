@@ -1,6 +1,6 @@
 API_KEY = None
 CHUNK_SIZE = 1
-MODEL = 'deepseek/deepseek-r1:free'
+MODEL = 'meta-llama/llama-4-maverick:free'
 PROMPT = """あなたはプロの翻訳家です。以下の英語テキストは、**マインクラフトの言語リソースパック**です。指示に従い、1行ずつ順番に日本語に翻訳してください。翻訳前後の行数を一致させてください。行の追加や削除は厳禁です。翻訳結果以外の応答は一切含めないでください。
 
 # 注意事項
