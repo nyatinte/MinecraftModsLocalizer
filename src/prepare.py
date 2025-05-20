@@ -5,7 +5,7 @@ import os
 import re
 
 from init import MAX_ATTEMPTS
-from chatgpt import translate_with_chatgpt
+from openrouter import translate_with_openrouter
 from provider import provide_chunk_size
 
 

@@ -6,7 +6,7 @@ from openai import OpenAI
 from provider import provide_api_key, provide_model, provide_prompt
 
 
-def translate_with_chatgpt(split_target, timeout):
+def translate_with_openrouter(split_target, timeout):
     start_time = time.time()
     result = []
 
@@ -14,7 +14,10 @@ def translate_with_chatgpt(split_target, timeout):
     split_target = [line.replace('\\n', '').replace('\n', '') for line in split_target] if len(split_target) > 1 else split_target
 
     # APIキーとクライアントの初期化
-    client = OpenAI(api_key=provide_api_key())
+    client = OpenAI(
+        base_url="https://openrouter.ai/api/v1",
+        api_key=provide_api_key()
+    )
 
     try:
         # ChatGPTを用いて翻訳を行う
