@@ -21,3 +21,4 @@ RUN pip install tk || echo "tkinter already included in python distribution"
 
 # PyInstallerでビルドする場合の例（コメントアウト）
 # RUN pyinstaller main.py --onefile --clean --console --distpath /app/dist --workpath /app/build --specpath /app
+RUN pyinstaller /app/src/main.py --onefile --clean --console --distpath /app/dist --workpath /app/build --specpath /app --specpath /app --additional-hooks-dir=/app --hidden-import tiktoken_ext --hidden-import tiktoken_ext.openai_public
