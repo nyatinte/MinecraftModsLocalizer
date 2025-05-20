@@ -1,21 +1,12 @@
 API_KEY = None
 CHUNK_SIZE = 1
 MODEL = 'deepseek/deepseek-r1:free'
-PROMPT = """You are a professional translator. Please translate the following English text into Japanese, one line at a time, step by step, in order
-Make sure that the number of lines of text before and after translation is the same. Never add or subtract extra lines.
+PROMPT = """あなたはプロの翻訳家です。以下の英語テキストは、**マインクラフトの言語リソースパック**です。指示に従い、1行ずつ順番に日本語に翻訳してください。翻訳前後の行数を一致させてください。行の追加や削除は厳禁です。翻訳結果以外の応答は一切含めないでください。
 
-# The number of lines of text to pass: {line_count}
-
-# Pay attention to the details below
-- Never include any greeting other than the translation result!
-- **Translate line by line, step by step, in order.**
-- **Make sure that the number of lines of text before and after translation is the same. Never add or subtract extra lines.**
-- **The meaning of the sentences before and after may be connected by chance, but if the lines are different, they are different sentences, so do not mix them up!**
-- **If multiple sentences are written on a single line, please translate as is, with all sentences on a single line.**
-- Proper nouns may be included and can be written in Katakana.
-- The backslash may be used as an escape character. Please maintain.
-- There might be programming variable characters such as %s, 1, or \\"; please retain these.
-- Do not edit any other characters that may look like special symbols.
+# 注意事項
+- 各行は独立した文として扱い、行をまたいで意味を混ぜないでください。
+- **マインクラフト特有の用語や固有名詞は、適切なカタカナ表記または日本語表現にしてください。**
+- バックスラッシュ、プログラミング変数（例: %s, \"),カラーコード（例: §c, §l）、その他の特殊記号はそのまま保持してください。
 
 # Example
 
@@ -33,19 +24,8 @@ if it has not yet been cleared.
 §6後ろにある鉱石をチェックします。
 §6壁、床、または天井
 寺院内のプレイヤーにマイニング疲労が適用されるかどうか。
-もしクリアされていない場合
-
-
-### input
-Add a new requirement group.Requirement groups can hold multiplerequirements and basicallymake them one big requirement.Requirement groups have two modes.In §zAND §rmode, all requirements needto return TRUE (which means "Yes, load!"),but in §zOR §rmode, only one requirementneeds to return TRUE.
-
-### incorrect output
-新しい要件グループを追加します。
-要件グループは複数の要件を保持でき、基本的にそれらを1つの大きな要件にまとめます。要件グループには2つのモードがあります。
-§zAND §rモードでは、すべての要件がTRUE（「はい、ロードする！」を意味します）を返す必要がありますが、§zOR §rモードでは、1つの要件だけがTRUEを返す必要があります。
-
-### correct output
-新しい要件グループを追加します。要件グループは複数の要件を保持でき、基本的にそれらを1つの大きな要件にまとめます。要件グループには2つのモードがあります。§zAND §rモードでは、すべての要件がTRUE（「はい、ロードする！」を意味します）を返す必要がありますが、§zOR §rモードでは、1つの要件だけがTRUEを返す必要があります。"""
+もしクリアされていない場合。
+"""
 
 
 LOG_DIRECTORY = None
