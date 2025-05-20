@@ -14,22 +14,23 @@ from update import check_version
 if __name__ == '__main__':
     # レイアウトの定義
     layout = [
-        [sg.Text("Translate Target")],
+        [sg.Text("Translate Target", expand_x=True)],
         [sg.Radio('Mod', key='target1', group_id=1, default=True), sg.Radio('FtbQuests', key='target2', group_id=1), sg.Radio('BetterQuesting', key='target3', group_id=1), sg.Radio('Patchouli', key='target4', group_id=1)],
-        [sg.Text("OpenAI API KEY")],
+        [sg.Text("OpenAI API KEY", expand_x=True)],
         [sg.InputText(key='OPENAI_API_KEY', expand_x=True)],
-        [sg.Text("Chunk Size")],
-        [sg.Text("単体mod翻訳、クエスト、Patchouliの翻訳では1\nModPackで大量のModを一括で翻訳するときは100くらいまで上げることをお勧めします(1だと翻訳時間がすごいことになります)")],
+        [sg.Text("Chunk Size", expand_x=True)],
+        [sg.Text("単体mod翻訳、クエスト、Patchouliの翻訳では1\nModPackで大量のModを一括で翻訳するときは100くらいまで上げることをお勧めします(1だと翻訳時間がすごいことになります)", expand_x=True)],
         [sg.Slider(range=(1, 200), key='CHUNK_SIZE', default_value=provide_chunk_size(), expand_x=True)],
-        [sg.Text("Model")],
+        [sg.Text("Model", expand_x=True)],
         [sg.InputText(key='MODEL', default_text=provide_model(), expand_x=True)],
-        [sg.Text("Prompt")],
-        [sg.Multiline(key='PROMPT', default_text=provide_prompt(), expand_x=True)],
-        [sg.Button("Translate", key='translate')]
+        [sg.Text("Prompt", expand_x=True)],
+        [sg.Multiline(key='PROMPT', default_text=provide_prompt(), expand_x=True, expand_y=True)],
+        [sg.Button("Translate", key='translate', expand_x=True)]
     ]
 
     # ウィンドウの作成
-    window = sg.Window('MinecraftModLocalizer', layout, size=(900, 500))
+    window = sg.Window('MinecraftModLocalizer', layout, size=(900, 500), resizable=True, finalize=True)
+    window.set_min_size((600, 400))
 
     # 現在の日時を取得
     now = datetime.now()
