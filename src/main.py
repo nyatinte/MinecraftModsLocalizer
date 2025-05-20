@@ -61,11 +61,6 @@ if __name__ == '__main__':
             set_model(values['MODEL'])
             set_prompt(values['PROMPT'])
 
-            # バージョンチェック
-            if not check_version():
-                sg.popup('最新バージョンがあるよ。バージョンアップしてね！')
-                break
-
             try:
                 if values['target1']:
                     translate_from_jar()
