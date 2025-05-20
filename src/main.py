@@ -16,8 +16,8 @@ if __name__ == '__main__':
     layout = [
         [sg.Text("Translate Target", expand_x=True)],
         [sg.Radio('Mod', key='target1', group_id=1, default=True), sg.Radio('FtbQuests', key='target2', group_id=1), sg.Radio('BetterQuesting', key='target3', group_id=1), sg.Radio('Patchouli', key='target4', group_id=1)],
-        [sg.Text("OpenAI API KEY", expand_x=True)],
-        [sg.InputText(key='OPENAI_API_KEY', expand_x=True)],
+        [sg.Text("OpenRouter API KEY", expand_x=True)],
+        [sg.InputText(key='OPENROUTER_API_KEY', expand_x=True)],
         [sg.Text("Chunk Size", expand_x=True)],
         [sg.Text("単体mod翻訳、クエスト、Patchouliの翻訳では1\nModPackで大量のModを一括で翻訳するときは100くらいまで上げることをお勧めします(1だと翻訳時間がすごいことになります)", expand_x=True)],
         [sg.Slider(range=(1, 200), key='CHUNK_SIZE', default_value=provide_chunk_size(), expand_x=True)],
@@ -56,7 +56,7 @@ if __name__ == '__main__':
         # 送信ボタンが押された場合
         if event == 'translate':
             # 入力された値を取得
-            set_api_key(values['OPENAI_API_KEY'])
+            set_api_key(values['OPENROUTER_API_KEY'])
             set_chunk_size(int(values['CHUNK_SIZE']))
             set_model(values['MODEL'])
             set_prompt(values['PROMPT'])

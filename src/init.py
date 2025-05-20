@@ -10,6 +10,6 @@ FTBQUESTS_DIR4 = Path('./config/ftbquests/quests/chapter_groups.snbt')
 
 MAX_ATTEMPTS = 5
 
-USER = 'Y-RyuZU'
+USER = 'nyatinte'
 REPO = 'MinecraftModsLocalizer'
-VERSION = 'v2.1.3'
+VERSION = 'v1.0.0-nyatinte'
